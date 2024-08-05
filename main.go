@@ -13,4 +13,7 @@ func main() {
 	ps := model.NewParticleSystem(particleCount, sizeX, sizeY, maxSpeed)
 	fmt.Println(ps)
 
+	for _, p := range ps.Particles {
+		p.Update()
+	}
 }

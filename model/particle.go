@@ -30,8 +30,7 @@ func NewParticle(maxX int, maxY int, maxVelocityComponent int) *Particle {
 	}
 }
 
-func Update(p *Particle) {
+func (p *Particle) Update() {
 	p.Position.X += p.Velocity.X
 	p.Position.Y += p.Velocity.Y
-	return
 }
