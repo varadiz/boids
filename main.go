@@ -3,17 +3,23 @@ package main
 import (
 	"boids/model"
 	"fmt"
+	"time"
 )
 
 func main() {
-	particleCount := 3
-	sizeX, sizeY := 300, 300
+	particleCount := 30
+	sizeX, sizeY := 10_000, 10_000
 	maxSpeed := 10
 
 	ps := model.NewParticleSystem(particleCount, sizeX, sizeY, maxSpeed)
-	fmt.Println(ps)
 
-	for _, p := range ps.Particles {
-		p.Update()
+	timer := time.NewTicker(50 * time.Millisecond)
+	for {
+		<-timer.C
+		for i := range ps.Particles {
+			ps.Particles[i].Update()
+		}
+		fmt.Print("\033[H\033[2J")
+		ps.Display(200.0, 30.0)
 	}
 }

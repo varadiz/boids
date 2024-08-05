@@ -1,6 +1,9 @@
 package model
 
-import "math/rand"
+import (
+	"math"
+	"math/rand"
+)
 
 type Position struct {
 	X int
@@ -18,14 +21,15 @@ type Particle struct {
 }
 
 func NewParticle(maxX int, maxY int, maxVelocityComponent int) *Particle {
+	sign := int(math.Round(rand.Float64()))*2 - 1 // -1 or 1
 	return &Particle{
 		Position: Position{
 			X: rand.Intn(maxX),
 			Y: rand.Intn(maxY),
 		},
 		Velocity: Velocity{
-			X: rand.Intn(maxVelocityComponent),
-			Y: rand.Intn(maxVelocityComponent),
+			X: sign * rand.Intn(maxVelocityComponent),
+			Y: sign * rand.Intn(maxVelocityComponent),
 		},
 	}
 }
