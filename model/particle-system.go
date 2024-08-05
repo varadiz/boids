@@ -26,8 +26,8 @@ func NewParticleSystem(particleCount, width, height int, maxSpeed int) *Particle
 }
 
 func (ps *ParticleSystem) Display(screenWidth, screenHeight float64) {
-	xMul := screenWidth / float64(ps.Width)
-	yMul := screenHeight / float64(ps.Height)
+	xScale := screenWidth / float64(ps.Width)
+	yScale := screenHeight / float64(ps.Height)
 
 	screen := make([][]rune, int(screenWidth))
 	for i := range screen {
@@ -39,9 +39,9 @@ func (ps *ParticleSystem) Display(screenWidth, screenHeight float64) {
 
 	for _, p := range ps.Particles {
 		// scale down
-		x := int(math.Round(float64(p.Position.X) * xMul))
-		y := int(math.Round(float64(p.Position.Y) * yMul))
-		screen[x][y] = '\u2593'
+		x := int(math.Round(float64(p.Position.X) * xScale))
+		y := int(math.Round(float64(p.Position.Y) * yScale))
+		screen[x-1][y-1] = '\u2593'
 	}
 
 	for _, line := range screen {
