@@ -6,13 +6,11 @@ import (
 )
 
 type Position struct {
-	X int
-	Y int
+	X, Y int
 }
 
 type Velocity struct {
-	X int
-	Y int
+	X, Y int
 }
 
 type Particle struct {
