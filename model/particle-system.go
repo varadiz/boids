@@ -37,10 +37,37 @@ func (ps *ParticleSystem) Display(screenWidth, screenHeight float64) {
 		}
 	}
 
-	for _, p := range ps.Particles {
+	for i, p := range ps.Particles {
+		// reposition if needed
+		if p.Position.X >= ps.Width {
+			ps.Particles[i].Position.X -= ps.Width
+		}
+
+		if p.Position.X <= 0 {
+			ps.Particles[i].Position.X += ps.Width
+		}
+
+		if p.Position.Y >= ps.Height {
+			ps.Particles[i].Position.Y -= ps.Height
+		}
+
+		if p.Position.Y <= 0 {
+			ps.Particles[i].Position.Y += ps.Height
+		}
+
 		// scale down
-		x := int(math.Round(float64(p.Position.X) * xScale))
-		y := int(math.Round(float64(p.Position.Y) * yScale))
+		var x, y int
+		x = int(math.Ceil(float64(ps.Particles[i].Position.X) * xScale))
+		y = int(math.Ceil(float64(ps.Particles[i].Position.Y) * yScale))
+
+		// hack
+		if x == 0 {
+			x += 1
+		}
+		if y == 0 {
+			y += 1
+		}
+
 		screen[x-1][y-1] = '\u2593'
 	}
 

@@ -13,7 +13,7 @@ func main() {
 
 	ps := model.NewParticleSystem(particleCount, sizeX, sizeY, maxSpeed)
 
-	timer := time.NewTicker(100 * time.Millisecond)
+	timer := time.NewTicker(10 * time.Millisecond)
 	for {
 		<-timer.C
 		for i := range ps.Particles {
